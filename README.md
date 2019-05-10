@@ -30,8 +30,8 @@ _To run this project,install it locally:_
 
  List of specs from the simplest possible behavior to the most complex behavior:
 
-| Behavior       | Input          | Output  |
-| ------------- |:-------------:| -----:|
+| Behavior       |
+| ------------- |
 |As a salon employee, I need to be able to see a list of all our stylists.  |
 |As an employee, I need to be able to select a stylist, see their details, and see a list of all clients that belong to that stylist |
 | As an employee, I need to add new stylists to our system when they are hired. |  
