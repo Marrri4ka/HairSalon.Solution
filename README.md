@@ -20,7 +20,7 @@ _To run this project,install it locally:_
 
 
 * Download .NET Core 2.1.3 SDK and .NET Core Runtime 2.0.9 and install them. Download Mono and Install it.
-* Clone this repository https://github.com/Marrri4ka/Word-Counter.git
+* Clone this repository https://github.com/Marrri4ka/HairSalon.Solution.git
 * Open the project in your preferred text editor to modify the files.
 * To run the program, navigate to WordCounter.Solution/WordCounter and use $dotnet build &&  $dotnet run
 * Navigate to localhost:5000
@@ -32,14 +32,11 @@ _To run this project,install it locally:_
 
 | Behavior       | Input          | Output  |
 | ------------- |:-------------:| -----:|
-|User enter two same words      | "cat" "cat cat"   |2|
-|User enter sentence of two different words | "cat" "cat dog"    |  1 |
-| User enter sentence of three words, where tow words are the same   | "cat" "cat dog cat"   |   2 |
-|User enter sentence with word 'meercat' | "cat" "I am a meercat" | 0 |
-|User can use lower or upper case| "cat" This is Cat | 1 |
-|User can enter sentence with different punctuation| "cat" This is Cat;not dog | 1 |
-|User enter instead of word a number | "1" This is Cat;not dog | "please use only letters" |
-|User forgot to enter a sentence  | "1"  | "please enter at least one word" |
+|As a salon employee, I need to be able to see a list of all our stylists.  |
+|As an employee, I need to be able to select a stylist, see their details, and see a list of all clients that belong to that stylist |
+| As an employee, I need to add new stylists to our system when they are hired. |  
+|As an employee, I need to be able to add new clients to a specific stylist. I should not be able to add a client if no stylists have been added.|
+
 
 ## Description
 ![Alt text](/img1/screen1.png)
