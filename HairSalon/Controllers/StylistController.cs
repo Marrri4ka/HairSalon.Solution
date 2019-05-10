@@ -41,5 +41,32 @@ public ActionResult Show(int id)
 	return View(model);
 }
 
+[HttpPost("/stylists/{stylistId}/clients")]
+public ActionResult Create(int stylistId, string clientName, DateTime clientAppointment)
+{
+	Dictionary<string, object> model = new Dictionary<string, object>();
+	Stylist foundStylist = Stylist.Find(stylistId);
+	Client newClient = new Client(clientName, clientAppointment, stylistId);
+	newClient.Save();
+	List<Client> stylistClients = foundStylist.GetClients();
+	model.Add("clients", stylistClients);
+	model.Add("stylist", foundStylist);
+	return View("Show", model);
+}
+
+[HttpPost("/stylists/{stylistId}/clients/{clientId}/deleteclient")]
+public ActionResult DeleteClient(int stylistId, int clientId)
+{
+	Client client = Client.Find(clientId);
+	client.Delete();
+	Dictionary<string, object> model = new Dictionary<string, object>();
+	Stylist stylist = Stylist.Find(stylistId);
+	List<Client> stylistClients = stylist.GetClients();
+	model.Add("stylist", stylist);
+	model.Add("clients", stylistClients);
+	return View("Show", model);
+}
+
+
 }
 }

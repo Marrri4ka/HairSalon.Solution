@@ -80,6 +80,23 @@ public static List<Client> GetAll()
 
 }
 
+public override bool Equals(System.Object otherClient)
+{
+	if (!(otherClient is Client))
+	{
+		return false;
+	}
+	else
+	{
+		Client newClient = (Client) otherClient;
+
+		bool idEquality = this.GetId() == newClient.GetId();
+		bool nameEquality = this.GetName() == newClient.GetName();
+		bool stylistEquality = this.GetStylistId() == newClient.GetStylistId();
+		return (idEquality && nameEquality && stylistEquality);
+	}
+}
+
 public void Save()
 {
 	MySqlConnection conn = DB.Connection();
@@ -144,6 +161,24 @@ public static Client Find(int id)
 		conn.Dispose();
 	}
 	return foundClient;
+}
+
+public void Delete()
+{
+	MySqlConnection conn = DB.Connection();
+	conn.Open();
+	var cmd = conn.CreateCommand() as MySqlCommand;
+	cmd.CommandText = @"DELETE FROM clients WHERE id=@client_id;";
+	MySqlParameter clientId = new MySqlParameter();
+	clientId.ParameterName = "@client_id";
+	clientId.Value = this._id;
+	cmd.Parameters.Add(clientId);
+	cmd.ExecuteNonQuery();
+	conn.Close();
+	if (conn != null)
+	{
+		conn.Dispose();
+	}
 }
 }
 }

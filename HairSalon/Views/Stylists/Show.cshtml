@@ -24,11 +24,14 @@
 
 
                 <form action='/stylists/@Model["stylist"].GetId()/clients/@client.GetId()/deleteclient' method="post">
-
+                  <button type="submit" class="btn btn-warning btn-circle btn-lg"><i class="glyphicon glyphicon-remove"></i>Delete</button>
 
                   <button><a href='/stylists/@Model["stylist"].GetId()/clients/@client.GetId()/edit' class="btn"><strong>Edit</strong></a></button>
 
                 </form>
+
+
+
       }
 
       <button type="button" class="btn btn-warning btn-sm btn-block"><a href='/stylists/@Model["stylist"].GetId()/client/new'>Add a new client</a></button>

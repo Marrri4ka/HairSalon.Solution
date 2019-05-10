@@ -7,7 +7,7 @@ namespace HairSalon.Controllers
 public class ClientController : Controller
 {
 
-[HttpGet("/stylists/{stylistId}/clients/new")]
+[HttpGet("/stylists/{stylistId}/client/new")]
 public ActionResult New(int stylistId)
 {
 	Stylist stylist = Stylist.Find(stylistId);
