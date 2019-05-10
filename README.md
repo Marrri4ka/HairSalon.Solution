@@ -26,7 +26,7 @@ _To run this project,install it locally:_
 * Navigate to localhost:5000
 
 
-## Word Counter Specifications
+## Specifications
 
  List of specs from the simplest possible behavior to the most complex behavior:
 
@@ -36,6 +36,16 @@ _To run this project,install it locally:_
 |As an employee, I need to be able to select a stylist, see their details, and see a list of all clients that belong to that stylist |
 | As an employee, I need to add new stylists to our system when they are hired. |  
 |As an employee, I need to be able to add new clients to a specific stylist. I should not be able to add a client if no stylists have been added.|
+
+
+Setup instructions with all commands necessary to re-create  databases, columns, and tables
+| Behavior       |
+| ------------- |
+|Start MAMP and click Open WebStart page in the MAMP window.  |
+|In the website you're taken to, select phpMyAdmin from the Tools dropdown.|
+| Select the Import tab. |  
+|Note that it's important to make sure you're not importing to a database that already exists, so make sure that a database with the same name as the one you're importing isn't already present.|
+|Select your database file, and click Go.|
 
 
 ## Description
