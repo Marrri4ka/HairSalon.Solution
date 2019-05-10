@@ -66,6 +66,14 @@ public ActionResult DeleteClient(int stylistId, int clientId)
 	model.Add("clients", stylistClients);
 	return View("Show", model);
 }
+[HttpGet("/stylists/{stylistId}/delete")]
+public ActionResult Delete(int stylistId)
+
+{
+	Stylist foundStylist = Stylist.Find(stylistId);
+	foundStylist.Delete();
+	return RedirectToAction("Index");
+}
 
 
 }

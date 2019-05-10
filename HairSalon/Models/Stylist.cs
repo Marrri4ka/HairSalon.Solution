@@ -151,6 +151,66 @@ public List<Client> GetClients()
 	return allStylistClients;
 }
 
+public static void ClearAll()
+{
+	MySqlConnection conn = DB.Connection();
+	conn.Open();
+	var cmd = conn.CreateCommand() as MySqlCommand;
+	cmd.CommandText = @"DELETE FROM stylists;";
+	cmd.ExecuteNonQuery();
+
+	conn.Close();
+	if(conn != null)
+	{
+		conn.Dispose();
+	}
+}
+
+public void Edit(string newName)
+{
+	MySqlConnection conn = DB.Connection();
+	conn.Open();
+	var cmd = conn.CreateCommand() as MySqlCommand;
+	cmd.CommandText = @"UPDATE stylists SET name = @newName WHERE id = @searchId;";
+	MySqlParameter searchId = new MySqlParameter();
+	searchId.ParameterName = "@searchId";
+	searchId.Value = _id;
+	cmd.Parameters.Add(searchId);
+	MySqlParameter name = new MySqlParameter();
+	name.ParameterName = "@newName";
+	name.Value = newName;
+	cmd.Parameters.Add(name);
+	cmd.ExecuteNonQuery();
+	_name = newName;
+	conn.Close();
+	if (conn != null)
+	{
+		conn.Dispose();
+	}
+}
+
+public void Delete()
+{
+	MySqlConnection conn = DB.Connection();
+	conn.Open();
+	var cmd = conn.CreateCommand() as MySqlCommand;
+	cmd.CommandText = @"DELETE FROM stylists WHERE id=@stylist_id;";
+	MySqlParameter stylistId = new MySqlParameter();
+	stylistId.ParameterName = "@stylist_id";
+	stylistId.Value = this._id;
+	cmd.Parameters.Add(stylistId);
+	cmd.ExecuteNonQuery();
+
+
+
+	conn.Close();
+	if (conn != null)
+	{
+		conn.Dispose();
+	}
+}
+
+
 
 }
 }
