@@ -67,6 +67,36 @@ public void Save()
 	}
 }
 
+public static Stylist Find(int id)
+{
+	MySqlConnection conn = DB.Connection();
+	conn.Open();
+	var cmd = conn.CreateCommand() as MySqlCommand;
+	cmd.CommandText = @"SELECT * FROM stylists WHERE id = (@searchId);";
+
+	MySqlParameter searchId = new MySqlParameter();
+	searchId.ParameterName = "@searchId";
+	searchId.Value = id;
+	cmd.Parameters.Add(searchId);
+
+	var rdr = cmd.ExecuteReader() as MySqlDataReader;
+	int StylistId = 0;
+	string StylistName = "";
+
+	while(rdr.Read())
+	{
+		StylistId = rdr.GetInt32(0);
+		StylistName = rdr.GetString(1);
+	}
+	Stylist newStylist = new Stylist(StylistName, StylistId);
+	conn.Close();
+	if (conn != null)
+	{
+		conn.Dispose();
+	}
+	return newStylist;
+}
+
 public static List<Stylist> GetAll()
 {
 	List<Stylist> allStylists = new List<Stylist> {
