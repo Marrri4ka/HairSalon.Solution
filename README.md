@@ -38,7 +38,8 @@ _To run this project,install it locally:_
 |As an employee, I need to be able to add new clients to a specific stylist. I should not be able to add a client if no stylists have been added.|
 
 
-Setup instructions with all commands necessary to re-create  databases, columns, and tables
+Setup instructions with all commands necessary to re-create  databases, columns, and tables:
+
 | Behavior       |
 | ------------- |
 |Start MAMP and click Open WebStart page in the MAMP window.  |
