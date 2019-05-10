@@ -29,16 +29,17 @@ public ActionResult New()
 	return View();
 }
 
-// [HttpGet("/stylists/{id}")]
-// public ActionResult Show(int id)
-// {
-//      Dictionary<string, object> model = new Dictionary<string, object>();
-//      Stylist selectedStylist = Stylist.Find(id);
-//      List<Client> stylistClient = selectedClient.GetClients();
-//      model.Add("category", selectedClient);
-//      model.Add("items", stylistClient);
-//      return View(model);
-// }
+
+[HttpGet("/stylists/{id}")]
+public ActionResult Show(int id)
+{
+	Dictionary<string, object> model = new Dictionary<string, object>();
+	Stylist selectedStylist = Stylist.Find(id);
+	List<Client> stylistClient = selectedStylist.GetClients();
+	model.Add("stylist", selectedStylist);
+	model.Add("clients", stylistClient);
+	return View(model);
+}
 
 }
 }

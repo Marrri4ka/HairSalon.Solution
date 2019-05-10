@@ -14,7 +14,7 @@ private int _id;
 public Stylist (string name,  int id=0)
 {
 	_name = name;
-	_id=id;
+	_id = id;
 }
 
 public override bool Equals (System.Object otherStylist)
@@ -119,6 +119,36 @@ public static List<Stylist> GetAll()
 		conn.Dispose();
 	}
 	return allStylists;
+}
+
+public List<Client> GetClients()
+{
+	List<Client> allStylistClients = new List<Client> {
+	};
+	MySqlConnection conn = DB.Connection();
+	conn.Open();
+	var cmd = conn.CreateCommand() as MySqlCommand;
+	cmd.CommandText = @"SELECT * FROM clients WHERE stylist_id = @stylist_id;";
+	MySqlParameter stylistId = new MySqlParameter();
+	stylistId.ParameterName = "@stylist_id";
+	stylistId.Value = this._id;
+	cmd.Parameters.Add(stylistId);
+	var rdr = cmd.ExecuteReader() as MySqlDataReader;
+	while(rdr.Read())
+	{
+		int clientId = rdr.GetInt32(0);
+		string clientName = rdr.GetString(1);
+		DateTime clientAppointment = rdr.GetDateTime(2);
+		int clientStylistId = rdr.GetInt32(3);
+		Client newClient = new Client(clientName, clientAppointment, clientStylistId, clientId);
+		allStylistClients.Add(newClient);
+	}
+	conn.Close();
+	if (conn != null)
+	{
+		conn.Dispose();
+	}
+	return allStylistClients;
 }
 
 
