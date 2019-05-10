@@ -34,6 +34,11 @@ public void SetName (string newName)
 	_name = newName;
 }
 
+public int GetId()
+{
+	return _id;
+}
+
 public DateTime GetAppointment()
 {
 	return _appointment;
@@ -107,6 +112,38 @@ public void Save()
 	{
 		conn.Dispose();
 	}
+}
+public static Client Find(int id)
+{
+	MySqlConnection conn = DB.Connection();
+	conn.Open();
+	var cmd = conn.CreateCommand() as MySqlCommand;
+	cmd.CommandText = @"SELECT * FROM clients WHERE id = (@searchId);";
+	MySqlParameter idParameter = new MySqlParameter();
+	idParameter.ParameterName = "@searchId";
+	idParameter.Value = id;
+	cmd.Parameters.Add(idParameter);
+	var rdr = cmd.ExecuteReader() as MySqlDataReader;
+	int clientId=0;
+	string clientName ="";
+	DateTime clientAppointment = new DateTime();
+	int clientStylistIdyId = 0;
+
+	while(rdr.Read())
+	{
+		clientId = rdr.GetInt32(0);
+		clientName = rdr.GetString(1);
+		clientAppointment = rdr.GetDateTime(2);
+		clientStylistIdyId = rdr.GetInt32(3);
+	}
+	Client foundClient = new Client (clientName,clientAppointment,clientStylistIdyId, clientId);
+
+	conn.Close();
+	if(conn != null)
+	{
+		conn.Dispose();
+	}
+	return foundClient;
 }
 }
 }
