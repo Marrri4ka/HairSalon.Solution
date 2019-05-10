@@ -49,6 +49,19 @@ public void GetId_ReturnsId_Id()
 	Assert.AreEqual(result, newStylist.GetId());
 }
 
+[TestMethod]
+public void GetAllStylists_ReturnAllStylists()
+{
+	Stylist newStylist = new Stylist("Roma",3);
+	newStylist.Save();
+	Stylist newStylist1 = new Stylist("Andi",3);
+	newStylist1.Save();
+	List<Stylist> newList = new List<Stylist> {
+		newStylist,newStylist1
+	};
+	List<Stylist> result = Stylist.GetAll();
+	CollectionAssert.AreEqual (result, newList);
+}
 
 
 }

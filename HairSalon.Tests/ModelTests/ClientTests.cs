@@ -25,15 +25,24 @@ public void ClientConstructor_CreatesInstanceOfClient_Client()
 	Client newClient = new Client("test", new DateTime(), 1);
 	Assert.AreEqual(typeof(Client), newClient.GetType());
 }
+[TestMethod]
+public void GetName_ReturnName()
+{
+	Client newClient = new Client("Lisa", new DateTime(), 1);
+	string result = "Lisa";
+	Assert.AreEqual(result,  newClient.GetName());
+}
 
-// [TestMethod]
-// public void GetName_ReturnName_String()
-// {
-//      string name = "Rita";
-//      DateTime appointment = 2/12/12;
-//      Client newClient = new Client(name,appointment,stylistId, clientId);
-//      string result = newClient.GetName();
-//      Assert.AreEqual(name,result);
-// }
+[TestMethod]
+public void FindId_ReturnId()
+{
+	Client newClient = new Client("Lisa", new DateTime(), 1);
+	newClient.Save();
+	int searchId = newClient.GetId();
+	Client foundClient = Client.Find(searchId);
+	Assert.AreEqual(newClient,foundClient);
+}
+
+
 }
 }
