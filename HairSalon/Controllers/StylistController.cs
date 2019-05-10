@@ -75,6 +75,36 @@ public ActionResult Delete(int stylistId)
 	return RedirectToAction("Index");
 }
 
+[HttpPost("/stylists/{stylistId}/clients/{clientId}/editclient")]
+public ActionResult Update(int stylistId, int clientId, string newName, DateTime newAppointment)
+{
+	Client client = Client.Find(clientId);
+	client.Edit(newName, newAppointment);
+	Dictionary<string, object> model = new Dictionary<string, object>();
+	Stylist stylist = Stylist.Find(stylistId);
+	List<Client> stylistClients = stylist.GetClients();
+	model.Add("stylist", stylist);
+	model.Add("clients", stylistClients);
+	return View("Show", model);
+}
+
+[HttpGet("/stylists/{stylistId}/edit")]
+public ActionResult Edit(int stylistId)
+
+{
+	Stylist foundStylist = Stylist.Find(stylistId);
+	return View("Edit",foundStylist );
+}
+
+[HttpPost("/stylists/{id}/editedStylist")]
+public ActionResult Edit(int id, string stylistName)
+{
+	Stylist newStylist = Stylist.Find(id);
+	newStylist.Edit(stylistName);
+	List<Stylist> allStylists = Stylist.GetAll();
+	return View("Index", allStylists);
+}
+
 
 }
 }

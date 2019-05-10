@@ -1,0 +1,22 @@
+<html>
+<head>
+
+</head>
+<body>
+
+
+<h2>Edit client info: @Model["client"].GetName()</h2>
+
+<form action="/stylists/@Model["stylist"].GetId()/clients/@Model["client"].GetId()/editclient" method="post">
+  <label for="newName">Name:</label>
+  <input type="text" name="newName" value="@Model["client"].GetName()"><br><br>
+  <label for="newAppointment">Appointment:</label>
+  <input type="date" name="newAppointment" value="@Model["client"].GetAppointment()"><br><br>
+  <button type="submit">Edit</button>
+</form>
+
+<h4><a href="/stylists/@Model["stylist"].GetId()/clients/@Model["client"].GetId()">Return to previous page</a></h4>
+
+
+</body>
+</html>
