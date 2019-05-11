@@ -2,51 +2,69 @@
 
 <head>
 
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
 </head>
 
 <body>
-  <div class="jumbotron">
-    <h3>Here are all stylist's clients:</h3>
+  <div class="container">
+
+    <div class="row col-md-6 col-md-offset-2 custyle">
+      <table class="table table-striped custab">
+        <thead>
+          <a class="btn btn-primary btn-xs pull-right" href='/stylists/@Model["stylist"].GetId()/client/new'>Add a new client</a>
+          <a class="btn btn-primary btn-xs pull-right" href='/stylists/@Model["stylist"].GetId()/clientsort'>Sort by duedate</a>
+
+          <a class="btn btn-primary btn-xs pull-right" href='/stylists'>Return to stylist list</a>
+
+          <a class="btn btn-primary btn-xs pull-left" href='/'>Return to Main Page</a>
 
 
-    @foreach (var client in @Model["clients"])
-    {
+          <tr>
+            <th>Client</th>
+            <th>Appointment</th>
+            <th class="text-center">Action</th>
+          </tr>
+        </thead>
+        @foreach (var client in @Model["clients"])
+        {
+        <tr>
+          <td> <a href='/stylists/@Model["stylist"].GetId()/clients/@client.GetId()'>
+              @client.GetName()
+            </a>
+          </td>
+          <td> <a href='/stylists/@Model["stylist"].GetId()/clients/@client.GetId()'>
+              @client.GetAppointment()
+            </a></td>
+          <td class="text-center">
+            <a class='btn btn-info btn-xs' href='/stylists/@Model["stylist"].GetId()/clients/@client.GetId()/edit'><span class="glyphicon glyphicon-edit"></span> Edit</a>
 
-    <a href='/stylists/@Model["stylist"].GetId()/clients/@client.GetId()'>
-      @client.GetName()
-    </a>
+            <form action='/stylists/@Model["stylist"].GetId()/clients/@client.GetId()/deleteclient' method="post">
+              <a href="#"> <button class="btn btn-danger btn-xs" type="submit" class="btn btn-warning btn-circle btn-lg"><i class="glyphicon glyphicon-remove"></i>Delete</button></a>
+            </form>
 
-
-    <a href='/stylists/@Model["stylist"].GetId()/clients/@client.GetId()'>
-      @client.GetAppointment()
-    </a>
-
-
-
-    <form action='/stylists/@Model["stylist"].GetId()/clients/@client.GetId()/deleteclient' method="post">
-      <button type="submit" class="btn btn-warning btn-circle btn-lg"><i class="glyphicon glyphicon-remove"></i>Delete</button>
-
-
-    </form>
-    <a href='/stylists/@Model["stylist"].GetId()/clients/@client.GetId()/edit' class="btn"><strong>Edit</strong></a>
-
-
-
-    }
-
-    <button type="button" class="btn btn-warning btn-sm btn-block"><a href='/stylists/@Model["stylist"].GetId()/client/new'>Add a new client</a></button>
-    <button type="button" class="btn btn-info btn-sm btn-block"><a href='/stylists/@Model["stylist"].GetId()/clientsort'>Sort by duedate</a></button>
-    <button type="button" class="btn btn-success btn-sm btn-block"><a href='/stylists'>Return to stylist list</a></button>
-    <button type="button" class="btn btn-danger btn-sm btn-block"><a href='/'>Return to Main Page</a></button>
+          </td>
+        </tr>
+        }
 
 
-
-
-
-
+      </table>
+    </div>
   </div>
+
+
+
+
+
+
+
+
+
+
 </body>
-</center>
+
+
 
 </html>
