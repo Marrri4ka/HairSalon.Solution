@@ -214,6 +214,38 @@ public void Edit(string newName, DateTime newAppointment)
 		conn.Dispose();
 	}
 }
+public static List<Client> Sort()
+{
+	List<Client> allClients = new List<Client> {
+	};
+
+	MySqlConnection conn = DB.Connection();
+	conn.Open();
+	MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+	cmd.CommandText = @"SELECT * FROM clients ORDER BY appoinment DESC;";
+	MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
+
+	while (rdr.Read())
+	{
+		int clientId = rdr.GetInt32(0);
+		string clientName = rdr.GetString(1);
+		DateTime appoinment = rdr.GetDateTime(2);
+		int clientStylistId = rdr.GetInt32(3);
+		Client newClient = new Client (clientName,appoinment,clientStylistId,clientId);
+		allClients.Add(newClient);
+	}
+
+	conn.Close();
+
+	if (conn != null)
+	{
+		conn.Dispose();
+	}
+
+	return allClients;
+
+}
+
 
 
 
