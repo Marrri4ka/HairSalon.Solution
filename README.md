@@ -50,9 +50,17 @@ _To run this project,install it locally:_
 
 
 ## Description
+
+* Homepage
 ![Alt text](/img1/1.png)
+
+* List of stylists
 ![Alt text](/img1/2.png)
+
+* List of clients
 ![Alt text](/img1/3.png)
+
+* Registration form
 ![Alt text](/img1/4.png)
 
 
