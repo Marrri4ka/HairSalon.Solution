@@ -50,9 +50,10 @@ _To run this project,install it locally:_
 
 
 ## Description
-![Alt text](/img1/screen1.png)
-![Alt text](/img1/screen2.png)
-![Alt text](/img1/screen3.png)
+![Alt text](/img1/1.png)
+![Alt text](/img1/2.png)
+![Alt text](/img1/3.png)
+![Alt text](/img1/4.png)
 
 
 ## Known Bugs

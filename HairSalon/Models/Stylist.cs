@@ -205,7 +205,7 @@ public void Delete()
 	cmd.Parameters.Add(stylistId);
 	cmd.ExecuteNonQuery();
 
-
+	// stylist_name, client_name
 
 	conn.Close();
 	if (conn != null)
