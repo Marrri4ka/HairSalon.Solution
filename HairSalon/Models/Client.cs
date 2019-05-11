@@ -214,7 +214,7 @@ public void Edit(string newName, DateTime newAppointment)
 		conn.Dispose();
 	}
 }
-public static List<Client> Sort()
+public static List<Client> Sort(int stylistId)
 {
 	List<Client> allClients = new List<Client> {
 	};
@@ -222,7 +222,11 @@ public static List<Client> Sort()
 	MySqlConnection conn = DB.Connection();
 	conn.Open();
 	MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
-	cmd.CommandText = @"SELECT * FROM clients ORDER BY appoinment DESC;";
+	cmd.CommandText = @"SELECT * FROM clients WHERE stylist_id = @stylistId ORDER BY appointment DESC;";
+	MySqlParameter stylistIdParameter = new MySqlParameter();
+	stylistIdParameter.ParameterName = "@stylistId";
+	stylistIdParameter.Value = stylistId;
+	cmd.Parameters.Add(stylistIdParameter);
 	MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
 
 	while (rdr.Read())

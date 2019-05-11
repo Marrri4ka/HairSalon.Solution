@@ -109,7 +109,7 @@ public ActionResult Sort(int stylistId, string clientName, DateTime appoinment  
 {
 	Dictionary<string, object> model = new Dictionary<string, object>();
 	Stylist foundStylist = Stylist.Find(stylistId);
-	List<Client> sortedClients = Client.Sort();
+	List<Client> sortedClients = Client.Sort(stylistId);
 	model.Add("clients", sortedClients);
 	model.Add("stylist", foundStylist);
 	return View("Show", model);
