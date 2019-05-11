@@ -22,7 +22,7 @@ public StylistTest()
 public void Dispose()
 {
 
-	Stylist.GetAll();
+	Stylist.ClearAll();
 }
 
 [TestMethod]

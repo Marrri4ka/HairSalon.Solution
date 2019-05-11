@@ -11,7 +11,7 @@ public class ClientTest : IDisposable
 {
 public void Dispose()
 {
-	Client.GetAll();
+	Client.ClearAll();
 }
 
 public ClientTest()
@@ -36,7 +36,10 @@ public void GetName_ReturnName()
 [TestMethod]
 public void FindId_ReturnId()
 {
-	Client newClient = new Client("Lisa", new DateTime(), 1);
+	Stylist stylist = new Stylist("Roma");
+	stylist.Save();
+
+	Client newClient = new Client("Lisa", new DateTime(), stylist.GetId());
 	newClient.Save();
 	int searchId = newClient.GetId();
 	Client foundClient = Client.Find(searchId);

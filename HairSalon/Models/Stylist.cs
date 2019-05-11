@@ -155,6 +155,10 @@ public static void ClearAll()
 {
 	MySqlConnection conn = DB.Connection();
 	conn.Open();
+	var deleteClients = conn.CreateCommand() as MySqlCommand;
+	deleteClients.CommandText = @"DELETE FROM clients;";
+	deleteClients.ExecuteNonQuery();
+
 	var cmd = conn.CreateCommand() as MySqlCommand;
 	cmd.CommandText = @"DELETE FROM stylists;";
 	cmd.ExecuteNonQuery();
