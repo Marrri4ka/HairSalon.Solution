@@ -1,5 +1,5 @@
 # Hair Salon ![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
-#### An MVC web application for a hair salon. The owner is to add a list of the stylists, and for each stylist, add clients who see that stylist. The stylists work independently, so each client only belongs to a single stylist. , 05.10.2019
+#### An MVC web application for a hair salon. The owner is able to add a list of the stylists, and for each stylist, add clients who see that stylist. The stylists work independently, so each client only belongs to a single stylist. , 05.10.2019
 
 
 
