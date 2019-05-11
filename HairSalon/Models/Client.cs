@@ -189,14 +189,14 @@ public void Edit(string newName, DateTime newAppointment)
 	conn.Open();
 	var cmd = conn.CreateCommand() as MySqlCommand;
 	cmd.CommandText = @"UPDATE clients SET name = @newName WHERE id = @searchId;";
-	cmd.CommandText = @"UPDATEclients SET appointment = @newAppointment WHERE id = @searchId;";
+	cmd.CommandText = @"UPDATE clients SET appointment = @newAppointment WHERE id = @searchId;";
 	MySqlParameter searchId = new MySqlParameter();
 	searchId.ParameterName = "@searchId";
 	searchId.Value = _id;
 	cmd.Parameters.Add(searchId);
 
 	MySqlParameter name = new MySqlParameter();
-	name.ParameterName = "@newDescription";
+	name.ParameterName = "@newName";
 	name.Value = newName;
 	cmd.Parameters.Add(name);
 	MySqlParameter appointment = new MySqlParameter();

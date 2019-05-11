@@ -1,22 +1,56 @@
 <html>
 
-<center>
+<head>
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <link rel='stylesheet' href='~/css/styles.css'>
+</head>
 
-  <body>
-    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'>
-    <div class="jumbotron">
+<body>
+  <div class="container register">
+    <div class="row">
+      <div class="col-md-3 register-left">
+        <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt="" />
+        <h3>New Stylist</h3>
+      </div>
+      <div class="col-md-9 register-right">
+        <div class="tab-content" id="myTabContent">
+          <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <h3 class="register-heading">Register new stylist</h3>
+            <div class="row register-form">
+              <div class="col-md-6">
+                <form action="/stylists" method="post" <label for="stylistName"></label>
 
-      <h1>Add a stylist</h1>
 
-      <form action="/stylists" method="post" <label for="stylistName">Stylist name</label>
-        <input id="stylistName" name="stylistName" type="text"> <button id="button" type="submit">Add</button><br>
-      </form>
+                  <div class="form-group">
+                    <input for='stylistName' name='stylistName' type="text" class="form-control" placeholder="First Name and Last Name *" value="" />
+                  </div>
 
-      <a class="card-link" href="/">Back home</a>
-      <a class="card-link" href="/stylists">Back to stylists</a>
 
+
+
+                  <button class="btnRegister" value="Register" type='submit'>Add stylist</button><br>
+                  <button class=" btn-light"> <a href="/">Back home</a></button><br>
+                  <button class=" btn-light"><a href="/stylists">Back to stylists</a></button>
+
+              </div>
+
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  </body>
-</center>
+  </div>
+
+
+
+
+
+
+
+
+</body>
 
 </html>
