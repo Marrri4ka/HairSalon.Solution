@@ -42,11 +42,11 @@ public ActionResult Show(int id)
 }
 
 [HttpPost("/stylists/{stylistId}/clients")]
-public ActionResult Create(int stylistId, string clientName, DateTime clientAppointment)
+public ActionResult Create(int stylistId, string clientName, DateTime appoinment)
 {
 	Dictionary<string, object> model = new Dictionary<string, object>();
 	Stylist foundStylist = Stylist.Find(stylistId);
-	Client newClient = new Client(clientName, clientAppointment, stylistId);
+	Client newClient = new Client(clientName, appoinment, stylistId);
 	newClient.Save();
 	List<Client> stylistClients = foundStylist.GetClients();
 	model.Add("clients", stylistClients);
