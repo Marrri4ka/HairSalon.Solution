@@ -49,18 +49,21 @@ _To run this project,install it locally:_
 |Select your database file, and click Go.|
 
 
-## Description
+## Homepage
 
-* Homepage
+
 ![Alt text](/img1/1.png)
 
-* List of stylists
+## List of stylists
+
 ![Alt text](/img1/2.png)
 
-* List of clients
+## List of clients
+
 ![Alt text](/img1/3.png)
 
-* Registration form
+## Registration form
+
 ![Alt text](/img1/4.png)
 
 
