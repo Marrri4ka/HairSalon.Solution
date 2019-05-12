@@ -46,7 +46,12 @@ _To run this project,install it locally:_
 |In the website you're taken to, select phpMyAdmin from the Tools dropdown.|
 | Select the Import tab. |  
 |Note that it's important to make sure you're not importing to a database that already exists, so make sure that a database with the same name as the one you're importing isn't already present.|
-|Select your database file, and click Go.|
+|In MySQL:
+
+> CREATE DATABASE mariia_stashuk;
+> USE mariia_stashuk;
+> CREATE TABLE stylists (id serial PRIMARY KEY, name VARCHAR(255));
+> CREATE TABLE clients (id serial PRIMARY KEY, name VARCHAR(255),appointment DATE(), stylist_id(INT11));|
 
 
 ## Homepage
