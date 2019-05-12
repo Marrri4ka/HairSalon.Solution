@@ -48,8 +48,8 @@ _To run this project,install it locally:_
 |Note that it's important to make sure you're not importing to a database that already exists, so make sure that a database with the same name as the one you're importing isn't already present.|
 |In MySQL:
 
-* CREATE DATABASE mariia_stashuk;
-* USE mariia_stashuk;
+* CREATE DATABASE hair_salon;
+* USE hair_salon;
 * CREATE TABLE stylists (id serial PRIMARY KEY, name VARCHAR(255));
 *CREATE TABLE clients (id serial PRIMARY KEY, name VARCHAR(255),appointment DATE(), stylist_id(INT11));|
 
