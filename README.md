@@ -51,7 +51,7 @@ _To run this project,install it locally:_
 * CREATE DATABASE hair_salon;
 * USE hair_salon;
 * CREATE TABLE stylists (id serial PRIMARY KEY, name VARCHAR(255));
-*CREATE TABLE clients (id serial PRIMARY KEY, name VARCHAR(255),appointment DATE(), stylist_id(INT11));|
+* CREATE TABLE clients (id serial PRIMARY KEY, name VARCHAR(255),appointment DATE(), stylist_id(INT11));|
 
 
 ## Homepage
