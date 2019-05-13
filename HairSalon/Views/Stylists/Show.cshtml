@@ -31,13 +31,13 @@
         @foreach (var client in @Model["clients"])
         {
         <tr>
-          <td> <a href='/stylists/@Model["stylist"].GetId()/clients/@client.GetId()'>
-              @client.GetName()
-            </a>
+          <td>
+            @client.GetName()
+
           </td>
-          <td> <a href='/stylists/@Model["stylist"].GetId()/clients/@client.GetId()'>
-              @client.GetAppointment()
-            </a></td>
+          <td>
+            @client.GetAppointment()
+          </td>
           <td class="text-center">
             <a class='btn btn-info btn-xs' href='/stylists/@Model["stylist"].GetId()/clients/@client.GetId()/edit'><span class="glyphicon glyphicon-edit"></span> Edit</a>
 
