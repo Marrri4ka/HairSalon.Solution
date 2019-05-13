@@ -1,5 +1,5 @@
 # Hair Salon ![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
-#### An MVC web application for a hair salon. The owner is to add a list of the stylists, and for each stylist, add clients who see that stylist. The stylists work independently, so each client only belongs to a single stylist. , 05.10.2019
+#### An MVC web application for a hair salon. The owner is able to add a list of the stylists, and for each stylist, add clients who see that stylist. The stylists work independently, so each client only belongs to a single stylist. , 05.10.2019
 
 
 
@@ -46,7 +46,12 @@ _To run this project,install it locally:_
 |In the website you're taken to, select phpMyAdmin from the Tools dropdown.|
 | Select the Import tab. |  
 |Note that it's important to make sure you're not importing to a database that already exists, so make sure that a database with the same name as the one you're importing isn't already present.|
-|Select your database file, and click Go.|
+|In MySQL:
+
+* CREATE DATABASE hair_salon;
+* USE hair_salon;
+* CREATE TABLE stylists (id serial PRIMARY KEY, name VARCHAR(255));
+* CREATE TABLE clients (id serial PRIMARY KEY, name VARCHAR(255),appointment DATE(), stylist_id(INT11));|
 
 
 ## Homepage
