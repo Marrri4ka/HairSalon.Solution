@@ -127,20 +127,24 @@ public List<Client> GetClients()
 	};
 	MySqlConnection conn = DB.Connection();
 	conn.Open();
-	var cmd = conn.CreateCommand() as MySqlCommand;
-	cmd.CommandText = @"SELECT * FROM clients WHERE stylist_id = @stylist_id;";
+	MySqlCommand cmd = conn.CreateCommand();
+	cmd.CommandText = @"SELECT clients. *
+										FROM stylists
+										JOIN stylists_clients ON (stylists.id = stylists_clients.stylisy_id)
+										JOIN clients ON (clients.id = stylists_clients.client_id)
+										WHERE stylists.id = @StylistId;";
 	MySqlParameter stylistId = new MySqlParameter();
-	stylistId.ParameterName = "@stylist_id";
+	stylistId.ParameterName = "@StylistId;";
 	stylistId.Value = this._id;
 	cmd.Parameters.Add(stylistId);
-	var rdr = cmd.ExecuteReader() as MySqlDataReader;
+	MySqlDataReader rdr = cmd.ExecuteReader();
 	while(rdr.Read())
 	{
 		int clientId = rdr.GetInt32(0);
 		string clientName = rdr.GetString(1);
 		DateTime clientAppointment = rdr.GetDateTime(2);
 		int clientStylistId = rdr.GetInt32(3);
-		Client newClient = new Client(clientName, clientAppointment, clientStylistId, clientId);
+		Client newClient = new Client(clientName, clientAppointment, clientId);
 		allStylistClients.Add(newClient);
 	}
 	conn.Close();
@@ -197,24 +201,19 @@ public void Delete()
 {
 	MySqlConnection conn = DB.Connection();
 	conn.Open();
-	var cmd = conn.CreateCommand() as MySqlCommand;
-	cmd.CommandText = @"DELETE FROM stylists WHERE id=@stylist_id;";
-	MySqlParameter stylistId = new MySqlParameter();
-	stylistId.ParameterName = "@stylist_id";
-	stylistId.Value = this._id;
-	cmd.Parameters.Add(stylistId);
+	MySqlCommand cmd = conn.CreateCommand();
+	cmd.CommandText = @"DELETE FROM stylists WHERE id=@StylistId; DELETE FROM stylists_clients WHERE stylist_id = @StylistId;";
+	MySqlParameter stylistParameter = new MySqlParameter();
+	stylistParameter.ParameterName = "@StylistId";
+	stylistParameter.Value = this.GetId();
+	cmd.Parameters.Add(stylistParameter);
 	cmd.ExecuteNonQuery();
-
-	// stylist_name, client_name
-
 	conn.Close();
 	if (conn != null)
 	{
 		conn.Dispose();
 	}
 }
-
-
 
 }
 }

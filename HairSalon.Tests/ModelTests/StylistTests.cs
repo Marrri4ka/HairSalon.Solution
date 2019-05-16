@@ -17,7 +17,7 @@ public class StylistTest : IDisposable
 
 public StylistTest()
 {
-	DBConfiguration.ConnectionString = "server=localhost;user id=root;password=root;port=8889;database=first_last_test;";
+	DBConfiguration.ConnectionString = "server=localhost;user id=root;password=root;port=8889;database=mariia_stashuk_test;";
 }
 public void Dispose()
 {

@@ -9,19 +9,14 @@ public class Client
 private string _name;
 private DateTime _appointment;
 private int _id;
-private int _stylistId;
 
 
-public Client (string name, DateTime appointment, int stylistId, int id=0)
+
+public Client (string name, DateTime appointment, int id=0)
 {
 	_name = name;
 	_appointment = appointment;
-	_stylistId = stylistId;
 	_id = id;
-}
-public int GetStylistId()
-{
-	return _stylistId;
 }
 
 public string GetName()
@@ -29,10 +24,6 @@ public string GetName()
 	return _name;
 }
 
-public void SetName (string newName)
-{
-	_name = newName;
-}
 
 public int GetId()
 {
@@ -44,10 +35,6 @@ public DateTime GetAppointment()
 	return _appointment;
 }
 
-public void SetAppointment(DateTime newAppointment)
-{
-	_appointment = newAppointment;
-}
 
 public static List<Client> GetAll()
 {
@@ -64,8 +51,7 @@ public static List<Client> GetAll()
 		int clientId = rdr.GetInt32(0);
 		string clientName = rdr.GetString(1);
 		DateTime clientAppointment = rdr.GetDateTime(2);
-		int stylistId = rdr.GetInt32(3);
-		Client newClient = new Client(clientName,clientAppointment,stylistId, clientId);
+		Client newClient = new Client(clientName,clientAppointment,clientId);
 		allClients.Add(newClient);
 	}
 
@@ -92,8 +78,7 @@ public override bool Equals(System.Object otherClient)
 
 		bool idEquality = this.GetId() == newClient.GetId();
 		bool nameEquality = this.GetName() == newClient.GetName();
-		bool stylistEquality = this.GetStylistId() == newClient.GetStylistId();
-		return (idEquality && nameEquality && stylistEquality);
+		return (idEquality && nameEquality);
 	}
 }
 
@@ -103,7 +88,7 @@ public void Save()
 	conn.Open();
 	var cmd = conn.CreateCommand() as MySqlCommand;
 
-	cmd.CommandText = @"INSERT INTO clients (name, appointment, stylist_id) VALUES (@ClientName, @ClientAppointment, @ClientStylistId);";
+	cmd.CommandText = @"INSERT INTO clients (name, appointment) VALUES (@ClientName, @ClientAppointment);";
 
 	MySqlParameter nameParameter = new MySqlParameter();
 	nameParameter.ParameterName = "@ClientName";
@@ -115,20 +100,13 @@ public void Save()
 	appointmentParameter.Value = this._appointment;
 	cmd.Parameters.Add(appointmentParameter);
 
-	MySqlParameter stylistParameter = new MySqlParameter();
-	stylistParameter.ParameterName = "@ClientStylistId";
-	stylistParameter.Value = this._stylistId;
-	cmd.Parameters.Add(stylistParameter);
 
 	cmd.ExecuteNonQuery();
 
 	_id = (int) cmd.LastInsertedId;
 
 	conn.Close();
-	if (conn != null)
-	{
-		conn.Dispose();
-	}
+	if( conn != null) conn.Dispose();
 }
 public static Client Find(int id)
 {
@@ -153,7 +131,7 @@ public static Client Find(int id)
 		clientAppointment = rdr.GetDateTime(2);
 		clientStylistIdyId = rdr.GetInt32(3);
 	}
-	Client foundClient = new Client (clientName,clientAppointment,clientStylistIdyId, clientId);
+	Client foundClient = new Client (clientName,clientAppointment,clientId);
 
 	conn.Close();
 	if(conn != null)
@@ -235,8 +213,7 @@ public static List<Client> Sort(int stylistId)
 		int clientId = rdr.GetInt32(0);
 		string clientName = rdr.GetString(1);
 		DateTime appoinment = rdr.GetDateTime(2);
-		int clientStylistId = rdr.GetInt32(3);
-		Client newClient = new Client (clientName,appoinment,clientStylistId,clientId);
+		Client newClient = new Client (clientName,appoinment,clientId);
 		allClients.Add(newClient);
 	}
 
@@ -249,6 +226,33 @@ public static List<Client> Sort(int stylistId)
 
 	return allClients;
 
+}
+
+public List<Stylist> GetStylists()
+{
+	List<Stylist> allStylists = new List<Stylist> {
+	};
+	MySqlConnection conn = DB.Connection();
+	conn.Open();
+	MySqlCommand cmd = conn.CreateCommand();
+	cmd.CommandText = @"SELECT stylists. *
+											FROM clients
+											JOIN stylists_clients ON (clients.id = stylists_clients.client_id)
+											JOIN stylists ON (stylists.id = stylists_clients.stylist_id)
+											WHERE clients.id = @ClientId;";
+	MySqlParameter clientParameter = new MySqlParameter ("@ClientId", this._id);
+	cmd.Parameters.Add(clientParameter);
+	MySqlDataReader rdr = cmd.ExecuteReader();
+	while(rdr.Read())
+	{
+		int id = rdr.GetInt32(0);
+		string name =rdr.GetString(1);
+		allStylists.Add(new Stylist(name,id));
+	}
+
+	conn.Close();
+	if (conn != null) conn.Dispose();
+	return allStylists;
 }
 
 
