@@ -65,18 +65,26 @@ public ActionResult New(int stylistId)
 	return View(stylist);
 }
 
-[HttpGet("/stylists/{stylistId}/clients/{clientId}/edit")]
-public ActionResult Edit(int stylistId, int clientId)
+[HttpGet("/clients/{clientId}/edit")]
+public ActionResult Edit( int clientId)
 {
 
-	Dictionary<string, object> model = new Dictionary<string, object>();
-	Stylist stylist = Stylist.Find(stylistId);
-	model.Add("stylist", stylist);
-	Client client = Client.Find(clientId);
-	model.Add("client", client);
-	return View(model);
-}
 
+	Client client = Client.Find(clientId);
+
+	return View(client);
+}
+[HttpPost("/clients/{clientId}/editclient")]
+public ActionResult Edit( int clientId, string newName, DateTime newAppointment)
+{
+
+
+	Client client = Client.Find(clientId);
+	client.Edit(newName,newAppointment);
+	List<Client> allClients = Client.GetAll();
+
+	return View("Index", allClients);
+}
 
 }
 }
