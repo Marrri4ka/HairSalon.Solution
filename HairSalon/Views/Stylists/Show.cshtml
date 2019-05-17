@@ -18,7 +18,7 @@ Stylist <strong>@ViewBag.Stylist.GetName()</strong> has these clients:
 }
 <br />
 
-<form action="/stylist/@ViewBag.Stylist.GetId()/addclient" method="post">
+<form action="/stylists/@ViewBag.Stylist.GetId()/addclient" method="post">
   <select name="clientId" id="clientId">
     @foreach (var client in ViewBag.Clients) {
     <option value="@client.GetId()">@client.GetName() </option>

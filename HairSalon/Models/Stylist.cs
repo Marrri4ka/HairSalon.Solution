@@ -215,5 +215,23 @@ public void Delete()
 	}
 }
 
+
+public void AddClient (Client client)
+{
+	MySqlConnection conn = DB.Connection();
+	conn.Open();
+	MySqlCommand cmd = conn.CreateCommand();
+	cmd.CommandText = @"INSERT INTO stylists_clients (client_id, stylist_id) VALUES (@ClientId, @StylistId);";
+	MySqlParameter clientId = new MySqlParameter("@ClientId", client.GetId());
+	MySqlParameter stylistId = new MySqlParameter("@StylistId",this._id);
+	cmd.Parameters.Add(clientId);
+	cmd.Parameters.Add(stylistId);
+
+	cmd.ExecuteNonQuery();
+
+	conn.Close();
+	if (conn != null) conn.Dispose();
+}
+
 }
 }
