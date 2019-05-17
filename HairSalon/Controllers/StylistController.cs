@@ -36,8 +36,11 @@ public ActionResult Show(int id)
 
 	Stylist newStylist = Stylist.Find(id);
 	ViewBag.Clients = Client.GetAll();
+	ViewBag.Specialities = Speciality.GetAll();
 	ViewBag.Stylist = Stylist.Find(id);
 	ViewBag.Clients1 = newStylist.GetClients();
+	ViewBag.Specialities1 = newStylist.GetSpecialities();
+
 	return View();
 }
 
@@ -47,8 +50,25 @@ public ActionResult AddClient(int id, int clientId)
 	Stylist newStylist = Stylist.Find(id);
 	newStylist.AddClient(Client.Find(clientId));
 	ViewBag.Clients = Client.GetAll();
+	ViewBag.Specialities = Speciality.GetAll();
 	ViewBag.Stylist = Stylist.Find(id);
 	ViewBag.Clients1 = newStylist.GetClients();
+	ViewBag.Specialities1 = newStylist.GetSpecialities();
+
+	return View("Show");
+}
+
+
+[HttpPost("/stylists/{id}/addspeciality")]
+public ActionResult AddSpeciality(int id, int specialityId)
+{
+	Stylist newStylist = Stylist.Find(id);
+	newStylist.AddSpeciality(Speciality.Find(specialityId));
+	ViewBag.Clients = Client.GetAll();
+	ViewBag.Specialities = Speciality.GetAll();
+	ViewBag.Stylist = Stylist.Find(id);
+	ViewBag.Clients1 = newStylist.GetClients();
+	ViewBag.Specialities1 = newStylist.GetSpecialities();
 
 	return View("Show");
 }

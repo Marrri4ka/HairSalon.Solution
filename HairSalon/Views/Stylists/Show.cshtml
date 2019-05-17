@@ -1,22 +1,8 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-
-<head>
-  <meta charset="utf-8">
-  <title></title>
-</head>
-
-<body>
-
-</body>
-
-</html>
-<br />
 Stylist <strong>@ViewBag.Stylist.GetName()</strong> has these clients:
 @foreach (var client in ViewBag.Clients1) {
 <li>@client.GetName()</li> <br />
 }
-<br />
+
 
 <form action="/stylists/@ViewBag.Stylist.GetId()/addclient" method="post">
   <select name="clientId" id="clientId">
@@ -25,4 +11,20 @@ Stylist <strong>@ViewBag.Stylist.GetName()</strong> has these clients:
     }
   </select>
   <button type="submit">Select</button>
+</form>
+
+
+Stylist <strong>@ViewBag.Stylist.GetName()</strong> has these specialities:
+@foreach (var speciality in ViewBag.Specialities1) {
+<li>@speciality.GetName()</li> <br />
+}
+
+
+<form action="/stylists/@ViewBag.Stylist.GetId()/addspeciality" method="post">
+  <select name="specialityId" id="specialityId">
+    @foreach (var speciality in ViewBag.Specialities) {
+    <option value="@speciality.GetId()">@speciality.GetName()</option>
+    }
+  </select>
+  <button type="submit">Add</button>
 </form>

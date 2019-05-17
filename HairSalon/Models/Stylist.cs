@@ -155,6 +155,35 @@ public List<Client> GetClients()
 	return allStylistClients;
 }
 
+public List<Speciality> GetSpecialities()
+{
+	List<Speciality> allStylistSpecialities = new List<Speciality> {
+	};
+	MySqlConnection conn = DB.Connection();
+	conn.Open();
+	MySqlCommand cmd = conn.CreateCommand();
+	cmd.CommandText = @"SELECT specialities. *
+										FROM stylists
+										JOIN specialities_stylists ON (stylists.id = specialities_stylists.stylist_id)
+										JOIN specialities ON (specialities.id = specialities_stylists.speciality_id)
+										WHERE stylists.id = @StylistId;";
+	MySqlParameter stylistIdParameter = new MySqlParameter("@StylistId",this._id);
+	cmd.Parameters.Add(stylistIdParameter);
+	MySqlDataReader rdr = cmd.ExecuteReader();
+	while(rdr.Read())
+	{
+		int specialityId = rdr.GetInt32(0);
+		string specialityName = rdr.GetString(1);
+
+		Speciality newSpeciality = new Speciality(specialityName, specialityId);
+		allStylistSpecialities.Add(newSpeciality);
+	}
+	conn.Close();
+	if (conn != null) conn.Dispose();
+
+	return allStylistSpecialities;
+}
+
 public static void ClearAll()
 {
 	MySqlConnection conn = DB.Connection();
@@ -225,6 +254,23 @@ public void AddClient (Client client)
 	MySqlParameter clientId = new MySqlParameter("@ClientId", client.GetId());
 	MySqlParameter stylistId = new MySqlParameter("@StylistId",this._id);
 	cmd.Parameters.Add(clientId);
+	cmd.Parameters.Add(stylistId);
+
+	cmd.ExecuteNonQuery();
+
+	conn.Close();
+	if (conn != null) conn.Dispose();
+}
+
+public void AddSpeciality (Speciality speciality)
+{
+	MySqlConnection conn = DB.Connection();
+	conn.Open();
+	MySqlCommand cmd = conn.CreateCommand();
+	cmd.CommandText = @"INSERT INTO specialities_stylists (stylist_id, speciality_id) VALUES (@StylistId, @SpecialityId);";
+	MySqlParameter specialityId = new MySqlParameter("@SpecialityId", speciality.GetId());
+	MySqlParameter stylistId = new MySqlParameter("@StylistId",this._id);
+	cmd.Parameters.Add(specialityId);
 	cmd.Parameters.Add(stylistId);
 
 	cmd.ExecuteNonQuery();

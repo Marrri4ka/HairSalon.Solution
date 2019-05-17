@@ -161,6 +161,7 @@ public void Delete()
 
 public static void ClearAll()
 {
+
 	MySqlConnection conn = DB.Connection();
 	conn.Open();
 	MySqlCommand cmd = conn.CreateCommand();

@@ -14,6 +14,15 @@ public ActionResult Index()
 	return View(allClients);
 }
 
+[HttpPost("/deleteall")]
+public ActionResult DeleteAll()
+
+{
+	Client.ClearAll();
+	List<Client> allClients = Client.GetAll();
+	return View("Index",allClients);
+}
+
 [HttpPost("/clients")]
 public ActionResult Create(string clientName, DateTime clientAppointment)
 {
