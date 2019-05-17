@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<br />
+Speciality <strong>@ViewBag.Speciality.GetName()</strong> has these stylists:
+@foreach (var stylist in ViewBag.Stylists1) {
+<li>@stylist.GetName()</li> <br />
+}
+<br />
+
+<form action="/specialities/@ViewBag.Speciality.GetId()/addstylist" method="post">
+  <select name="stylistId" id="stylistId">
+    @foreach (var stylist in ViewBag.Stylists) {
+    <option value="@stylist.GetId()">@stylist.GetName() </option>
+    }
+  </select>
+  <button type="submit">Select</button>
+</form>

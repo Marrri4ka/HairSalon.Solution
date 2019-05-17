@@ -126,7 +126,7 @@ public List<Stylist> GetStylists()
 	MySqlCommand cmd = conn.CreateCommand();
 	cmd.CommandText = @"SELECT stylists. *
 										FROM specialities
-										JOIN specialities_stylists ON (speciality.id = specialities_stylists.speciality_id)
+										JOIN specialities_stylists ON (specialities.id = specialities_stylists.speciality_id)
 										JOIN stylists ON (stylists.id = specialities_stylists.stylist_id)
 										WHERE specialities.id = @SpecialityId;";
 	MySqlParameter specialityIdParameter = new MySqlParameter("@SpecialityId", this._id);
@@ -145,6 +145,50 @@ public List<Stylist> GetStylists()
 	if (conn != null) conn.Dispose();
 
 	return allSpecialityStylists;
+}
+
+public static void ClearAll()
+{
+	MySqlConnection conn = DB.Connection();
+	conn.Open();
+	MySqlCommand cmd = conn.CreateCommand();
+	cmd.CommandText = @"DELETE * FROM specialities;";
+	cmd.ExecuteNonQuery();
+
+	conn.Close();
+	if(conn != null) conn.Dispose();
+}
+
+public void Delete()
+{
+	MySqlConnection conn = DB.Connection();
+	conn.Open();
+	MySqlCommand cmd = conn.CreateCommand();
+	cmd.CommandText = @"DELETE FROM specialities WHERE id=@SpecialityId; DELETE FROM specialities_stylists WHERE speciality_id = @SpecialityId;";
+	MySqlParameter specialityParameter = new MySqlParameter("@SpecialityId",this.GetId());
+	cmd.Parameters.Add(specialityParameter);
+	cmd.ExecuteNonQuery();
+	conn.Close();
+	if (conn != null) conn.Dispose();
+
+}
+
+
+public void AddStylist (Stylist stylist)
+{
+	MySqlConnection conn = DB.Connection();
+	conn.Open();
+	MySqlCommand cmd = conn.CreateCommand();
+	cmd.CommandText = @"INSERT INTO specialities_stylists (stylist_id, speciality_id) VALUES (@StylistId, @SpecialityId);";
+	MySqlParameter stylistId = new MySqlParameter("@StylistId", stylist.GetId());
+	MySqlParameter specialitytId = new MySqlParameter("@SpecialityId",this._id);
+	cmd.Parameters.Add(stylistId);
+	cmd.Parameters.Add(specialitytId);
+
+	cmd.ExecuteNonQuery();
+
+	conn.Close();
+	if (conn != null) conn.Dispose();
 }
 
 
