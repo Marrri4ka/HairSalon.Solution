@@ -1,71 +1,28 @@
-@using HairSalon.Models;
-<html>
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
 
 <head>
-
-  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-
+  <meta charset="utf-8">
+  <title></title>
 </head>
 
 <body>
-  <div class="container">
-
-    <div class="row col-md-6 col-md-offset-2 custyle">
-      <table class="table table-striped custab">
-        <thead>
-          <a class="btn btn-primary btn-xs pull-right" href='/stylists/@Model["stylist"].GetId()/client/new'>Add a new client</a>
-          <a class="btn btn-primary btn-xs pull-right" href='/stylists/@Model["stylist"].GetId()/clientsort'>Sort by duedate</a>
-
-          <a class="btn btn-primary btn-xs pull-right" href='/stylists'>Return to stylist list</a>
-
-          <a class="btn btn-primary btn-xs pull-left" href='/'>Return to Main Page</a>
-
-
-          <tr>
-            <th>Client</th>
-            <th>Appointment</th>
-            <th class="text-center">Action</th>
-          </tr>
-        </thead>
-        @foreach (var client in @Model["clients"])
-        {
-        <tr>
-          <td>
-            @client.GetName()
-
-          </td>
-          <td>
-            @client.GetAppointment()
-          </td>
-          <td class="text-center">
-            <a class='btn btn-info btn-xs' href='/stylists/@Model["stylist"].GetId()/clients/@client.GetId()/edit'><span class="glyphicon glyphicon-edit"></span> Edit</a>
-
-            <form action='/stylists/@Model["stylist"].GetId()/clients/@client.GetId()/deleteclient' method="post">
-              <a href="#"> <button class="btn btn-danger btn-xs" type="submit" class="btn btn-warning btn-circle btn-lg"><i class="glyphicon glyphicon-remove"></i>Delete</button></a>
-            </form>
-
-          </td>
-        </tr>
-        }
-
-
-      </table>
-    </div>
-  </div>
-
-
-
-
-
-
-
-
-
 
 </body>
 
-
-
 </html>
+<br />
+Stylist <strong>@ViewBag.Stylist.GetName()</strong> has these clients:
+@foreach (var client in ViewBag.Clients1) {
+<li>@client.GetName()</li> <br />
+}
+<br />
+
+<form action="/stylist/@ViewBag.Stylist.GetId()/addclient" method="post">
+  <select name="clientId" id="clientId">
+    @foreach (var client in ViewBag.Clients) {
+    <option value="@client.GetId()">@client.GetName() </option>
+    }
+  </select>
+  <button type="submit">Select</button>
+</form>

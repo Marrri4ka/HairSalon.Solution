@@ -130,20 +130,20 @@ public List<Client> GetClients()
 	MySqlCommand cmd = conn.CreateCommand();
 	cmd.CommandText = @"SELECT clients. *
 										FROM stylists
-										JOIN stylists_clients ON (stylists.id = stylists_clients.stylisy_id)
+										JOIN stylists_clients ON (stylists.id = stylists_clients.stylist_id)
 										JOIN clients ON (clients.id = stylists_clients.client_id)
 										WHERE stylists.id = @StylistId;";
-	MySqlParameter stylistId = new MySqlParameter();
-	stylistId.ParameterName = "@StylistId;";
-	stylistId.Value = this._id;
-	cmd.Parameters.Add(stylistId);
+	MySqlParameter stylistIdParameter = new MySqlParameter();
+	stylistIdParameter.ParameterName = "@StylistId";
+	stylistIdParameter.Value = this._id;
+	cmd.Parameters.Add(stylistIdParameter);
 	MySqlDataReader rdr = cmd.ExecuteReader();
 	while(rdr.Read())
 	{
 		int clientId = rdr.GetInt32(0);
 		string clientName = rdr.GetString(1);
 		DateTime clientAppointment = rdr.GetDateTime(2);
-		int clientStylistId = rdr.GetInt32(3);
+
 		Client newClient = new Client(clientName, clientAppointment, clientId);
 		allStylistClients.Add(newClient);
 	}

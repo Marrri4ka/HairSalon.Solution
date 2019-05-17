@@ -39,6 +39,16 @@ public ActionResult Show(int id)
 	return View();
 }
 
+[HttpPost("/clients/{id}/addstylist")]
+public ActionResult AddStylist(int id, int stylistId)
+{
+	Client newClient = Client.Find(id);
+	newClient.AddStylist(Stylist.Find(stylistId));
+	ViewBag.Stylists = Stylist.GetAll();
+	ViewBag.Client = Client.Find(id);
+	ViewBag.Stylists1 = newClient.GetStylists();
+	return View("Show");
+}
 [HttpGet("/stylists/{stylistId}/client/new")]
 public ActionResult New(int stylistId)
 {
