@@ -85,6 +85,17 @@ public ActionResult Edit( int clientId, string newName, DateTime newAppointment)
 
 	return View("Index", allClients);
 }
+[HttpGet("/clients/{clientId}/delete")]
+public ActionResult Delete(int clientId)
+{
+
+
+	Client client = Client.Find(clientId);
+	client.Delete();
+	List<Client> allClients = Client.GetAll();
+
+	return View("Index", allClients);
+}
 
 }
 }

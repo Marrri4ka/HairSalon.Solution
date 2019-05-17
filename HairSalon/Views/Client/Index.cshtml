@@ -6,8 +6,8 @@
   <ul>
     @foreach (var client in Model)
     {
-      <li><a href='/clients/@client.GetId()'>@client.GetName()</a>
-      <a href='/clients/@client.GetId()/delete'>Dlete</a>
+      <li><a href='/clients/@client.GetId()'>@client.GetName() @client.GetAppointment()</a>
+      <a href='/clients/@client.GetId()/delete'>Delete</a>
       <a href='/clients/@client.GetId()/edit'>Edit</a>
       </li>
 

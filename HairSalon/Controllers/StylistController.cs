@@ -14,6 +14,14 @@ public ActionResult Index()
 	return View(allStylists);
 }
 
+[HttpPost("/deleteallstylists")]
+public ActionResult DeleteAll()
+{
+	Stylist.ClearAll();
+	List<Stylist> allStylists = Stylist.GetAll();
+	return View("Index",allStylists);
+}
+
 [HttpPost("/stylists")]
 public ActionResult Create(string stylistName)
 {
