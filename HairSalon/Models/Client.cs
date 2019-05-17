@@ -129,7 +129,7 @@ public static Client Find(int id)
 		clientId = rdr.GetInt32(0);
 		clientName = rdr.GetString(1);
 		clientAppointment = rdr.GetDateTime(2);
-		clientStylistIdyId = rdr.GetInt32(3);
+
 	}
 	Client foundClient = new Client (clientName,clientAppointment,clientId);
 
@@ -157,6 +157,18 @@ public void Delete()
 	{
 		conn.Dispose();
 	}
+}
+
+public static void ClearAll()
+{
+	MySqlConnection conn = DB.Connection();
+	conn.Open();
+	MySqlCommand cmd = conn.CreateCommand();
+	cmd.CommandText = @"DELETE FROM clients;";
+	cmd.ExecuteNonQuery();
+
+	conn.Close();
+	if(conn != null) conn.Dispose();
 }
 
 
@@ -193,7 +205,7 @@ public void Edit(string newName, DateTime newAppointment)
 		conn.Dispose();
 	}
 }
-public static List<Client> Sort(int stylistId)
+public static List<Client> Sort()
 {
 	List<Client> allClients = new List<Client> {
 	};
@@ -201,11 +213,8 @@ public static List<Client> Sort(int stylistId)
 	MySqlConnection conn = DB.Connection();
 	conn.Open();
 	MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
-	cmd.CommandText = @"SELECT * FROM clients WHERE stylist_id = @stylistId ORDER BY appointment DESC;";
-	MySqlParameter stylistIdParameter = new MySqlParameter();
-	stylistIdParameter.ParameterName = "@stylistId";
-	stylistIdParameter.Value = stylistId;
-	cmd.Parameters.Add(stylistIdParameter);
+	cmd.CommandText = @"SELECT * FROM clients ORDER BY appointment;";
+
 	MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
 
 	while (rdr.Read())
@@ -242,6 +251,7 @@ public List<Stylist> GetStylists()
 											WHERE clients.id = @ClientId;";
 	MySqlParameter clientParameter = new MySqlParameter ("@ClientId", this._id);
 	cmd.Parameters.Add(clientParameter);
+
 	MySqlDataReader rdr = cmd.ExecuteReader();
 	while(rdr.Read())
 	{
@@ -253,6 +263,23 @@ public List<Stylist> GetStylists()
 	conn.Close();
 	if (conn != null) conn.Dispose();
 	return allStylists;
+}
+
+public void AddStylist(Stylist stylist)
+{
+	MySqlConnection conn = DB.Connection();
+	conn.Open();
+	MySqlCommand cmd = conn.CreateCommand();
+	cmd.CommandText= @"INSERT INTO stylists_clients (client_id, stylist_id) VALUES (@ClientId, @StylistId);";
+	MySqlParameter clientIdParameter = new MySqlParameter ("@ClientId",this._id);
+	MySqlParameter stylistIdParameter = new MySqlParameter("@StylistId", stylist.GetId());
+	cmd.Parameters.Add(clientIdParameter);
+	cmd.Parameters.Add(stylistIdParameter);
+
+
+	cmd.ExecuteNonQuery();
+	conn.Close();
+	if(conn != null) conn.Dispose();
 }
 
 

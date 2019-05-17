@@ -104,14 +104,14 @@ public ActionResult Edit(int id, string stylistName)
 	List<Stylist> allStylists = Stylist.GetAll();
 	return View("Index", allStylists);
 }
-[HttpGet("/stylists/{stylistId}/clientsort")]
-public ActionResult Sort(int stylistId, string clientName, DateTime appoinment  )
+[HttpGet("/stylists/clientsort")]
+public ActionResult Sort(string clientName, DateTime appoinment)
 {
 	Dictionary<string, object> model = new Dictionary<string, object>();
-	Stylist foundStylist = Stylist.Find(stylistId);
-	List<Client> sortedClients = Client.Sort(stylistId);
+
+	List<Client> sortedClients = Client.Sort();
 	model.Add("clients", sortedClients);
-	model.Add("stylist", foundStylist);
+
 	return View("Show", model);
 }
 

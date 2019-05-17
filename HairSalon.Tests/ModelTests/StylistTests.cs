@@ -23,15 +23,9 @@ public void Dispose()
 {
 
 	Stylist.ClearAll();
+	Client.ClearAll();
 }
 
-[TestMethod]
-public void StylistConstructor_CreatesInstanceOfStylist_Stylist()
-{
-	string name = "Rita";
-	Stylist newStylist = new Stylist(name);
-	Assert.AreEqual(typeof(Stylist), newStylist.GetType());
-}
 
 [TestMethod]
 public void GetName_ReturnsName_StylistName()
@@ -62,6 +56,8 @@ public void GetAllStylists_ReturnAllStylists()
 	List<Stylist> result = Stylist.GetAll();
 	CollectionAssert.AreEqual (result, newList);
 }
+
+
 
 
 }

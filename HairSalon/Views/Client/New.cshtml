@@ -1,44 +1,42 @@
-<html>
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
 
 <head>
+  <meta charset="utf-8">
   <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <link rel='stylesheet' href='~/css/styles.css'>
+  <title>client</title>
 </head>
+<center>
 
-<body>
-
-  <div class="container register">
-    <div class="row">
-      <div class="col-md-3 register-left">
-        <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt="" />
-        <h3>New Client</h3>
+  <body>
+    <div class="container contact-form">
+      <div class="contact-image">
+        <img src="~/img/food.svg" height="80" width="80" alt="rocket_contact" />
       </div>
-      <div class="col-md-9 register-right">
-        <div class="tab-content" id="myTabContent">
-          <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-            <h3 class="register-heading">Register new client for @Model.GetName()</h3>
-            <div class="row register-form">
-              <div class="col-md-6">
-                <form class="form" action='/stylists/@Model.GetId()/clients' method='post'> <input id='categoryId' name='categoryId' type='hidden' value='@Model.GetId()'>
-                  <div class="form-group">
-                    <input for='clientName' name='clientName' type="text" class="form-control" placeholder="First Name and Last Name *" value="" />
-                  </div>
+      <form action="/clients" method="post">
+        <h3>Add a new client</h3>
 
-                  <div class="form-group">
-                    <input name='appoinment' type="date" class="form-control" placeholder="Appointment *" value="" />
-                  </div>
-                  <button class="btnRegister" value="Register" type='submit'>Add client</button>
-              </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <input required type="text" name="clientName" id="clientName" class="form-control" placeholder="Name * Last Name" value="" />
+            </div>
+            <div class="form-group">
+              <input name="clientAppointment" id="clientAppointment" type="date" required class="form-control" placeholder="Appointment *" value="" />
+            </div>
 
-              </form>
+            <div class="form-group">
+              <button type="submit">Add</button>
             </div>
           </div>
+
         </div>
-      </div>
+      </form>
     </div>
-  </div>
-</body>
+  </body>
+</center>
 
 </html>

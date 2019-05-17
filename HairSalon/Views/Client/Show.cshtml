@@ -1,0 +1,19 @@
+@ViewBag.Client.GetName()
+@ViewBag.Client.GetAppointment()
+
+
+<br/>
+Client hat these stylists:
+@foreach (var stylist in ViewBag.Stylists1) {
+  @stylist.GetName() <br/>
+}
+<br/>
+
+<form action="/clients/@ViewBag.Client.GetId()/addstylist" method="post">
+<select name="stylistId" id="stylistId">
+@foreach (var stylist in ViewBag.Stylists) {
+<option value="@stylist.GetId()">@stylist.GetName()</option>
+}
+</select>
+<button type="submit">Select</button>
+</form>
