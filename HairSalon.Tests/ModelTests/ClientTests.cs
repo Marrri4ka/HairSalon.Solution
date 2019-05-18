@@ -11,8 +11,9 @@ public class ClientTest : IDisposable
 {
 public void Dispose()
 {
-	Client.ClearAll();
 	Stylist.ClearAll();
+	Client.ClearAll();
+	Speciality.ClearAll();
 }
 
 public ClientTest()

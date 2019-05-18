@@ -7,7 +7,7 @@ using HairSalon;
 
 
 
-namespace ToDoList.Tests
+namespace HairSalon.Tests
 {
 [TestClass]
 public class StylistTest : IDisposable
@@ -24,6 +24,7 @@ public void Dispose()
 
 	Stylist.ClearAll();
 	Client.ClearAll();
+	Speciality.ClearAll();
 }
 
 
@@ -121,6 +122,51 @@ public void GetSpecialities_ReturnStylistWithAllClients()
 	CollectionAssert.AreEqual(allStylistsSpecialities,result);
 
 
+}
+
+[TestMethod]
+public void Delete_ReturnNewList()
+{
+	Stylist newStylist = new Stylist("Sorianna");
+	newStylist.Save();
+	Stylist newStylist1 = new Stylist("Mona");
+	newStylist1.Save();
+	newStylist.Delete();
+	List<Stylist> result = new List<Stylist> {
+		newStylist1
+	};
+	List<Stylist> allStylists = Stylist.GetAll();
+	CollectionAssert.AreEqual(result,allStylists);
+}
+[TestMethod]
+public void AddClient_ReturnStylistWithNewClient()
+{
+	Stylist newStylist = new Stylist("Sorianna");
+	newStylist.Save();
+	Client newClient = new Client("Lisa", new DateTime(2002,2,4));
+	newClient.Save();
+	newStylist.AddClient(newClient);
+	List<Client> allClients = newStylist.GetClients();
+	List<Client> result = new List<Client> {
+		newClient
+	};
+	CollectionAssert.AreEqual(allClients,result);
+
+
+}
+[TestMethod]
+public void AddSpeciality_ReturnStylistWithhNewSpeciality()
+{
+	Stylist newStylist = new Stylist("Sorianna");
+	newStylist.Save();
+	Speciality newSpeciality = new Speciality("Hair");
+	newSpeciality.Save();
+	newStylist.AddSpeciality(newSpeciality);
+	List<Speciality> allSpecialities = newStylist.GetSpecialities();
+	List<Speciality> result = new List<Speciality> {
+		newSpeciality
+	};
+	CollectionAssert.AreEqual(allSpecialities,result);
 }
 
 

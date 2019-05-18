@@ -29,10 +29,15 @@ _To run this project,install it locally:_
 
 | Behavior       |
 | ------------- |
-|As a salon employee, I need to be able to see a list of all our stylists.  |
-|As an employee, I need to be able to select a stylist, see their details, and see a list of all clients that belong to that stylist |
-| As an employee, I need to add new stylists to our system when they are hired. |  
-|As an employee, I need to be able to add new clients to a specific stylist. I should not be able to add a client if no stylists have been added.|
+|Salon employee is  able to see a list of all our stylists.  |
+|An employee is able to select a stylist, see their details, and see a list of all clients that belong to that stylist |
+| An employee can add new stylists to our system when they are hired. |  
+|An employee is able to add new clients to a specific stylist; is not able to add a client if no stylists have been added.|
+|An employee is  able to edit JUST the name of a stylist.|
+|An employee is able to edit ALL of the information for a client.|
+|An employee is able to add a specialty and view all specialties that have been added.|
+|An employee is able to click on a specialty and see all of the stylists that have that specialty.|
+|An employee can see the stylist's specialties on the stylist's details page.|
 
 
 

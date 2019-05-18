@@ -38,10 +38,10 @@ public override bool Equals (System.Object obj)
 	}
 	else
 	{
-		Stylist newStylist = (Stylist) obj;
-		bool idEquality = this.GetId().Equals(newStylist.GetId());
-		bool nameEquality = this.GetName().Equals(newStylist.GetName());
-		return (idEquality&&nameEquality);
+		Speciality newSpeciality = (Speciality) obj;
+		bool idEquality = this.GetId().Equals(newSpeciality.GetId());
+		bool nameEquality = this.GetName().Equals(newSpeciality.GetName());
+		return (idEquality && nameEquality);
 	}
 }
 
@@ -152,7 +152,7 @@ public static void ClearAll()
 	MySqlConnection conn = DB.Connection();
 	conn.Open();
 	MySqlCommand cmd = conn.CreateCommand();
-	cmd.CommandText = @"DELETE * FROM specialities;";
+	cmd.CommandText = @"DELETE FROM specialities;";
 	cmd.ExecuteNonQuery();
 
 	conn.Close();

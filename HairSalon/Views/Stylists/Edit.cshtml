@@ -1,35 +1,38 @@
 <html>
 <center>
-<body>
-  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'>
-  <div class="jumbotron">
-    <center>
-      <h1>Edit stylist</h1>
-    </center>
-  </div>
 
-
-
-
-
-
-  <div class="card" style="width: 18rem;">
-    <div class="card-body">
-
-      <form action="/stylists/@Model.GetId()/editedStylist" method="post">
-        <label for="stylistName">Change name</label>
-        <input id="stylistName" name="stylistName" type="text" value ="@Model.GetName()"> <button id="button" type="submit">Update</button><br>
-
-
-      </form>
-
-      <a class="card-link" href="/">Back home</a>
-      <a class="card-link" href="/stylists">Back to categories</a>
-
+  <body>
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'>
+    <div class="jumbotron">
+      <center>
+        <h1>Edit stylist</h1>
+      </center>
     </div>
-  </div>
 
 
-</body>
+
+
+
+
+    <div class="card" style="width: 18rem;">
+      <div class="card-body">
+
+        <form action="/stylists/@Model.GetId()/editedStylist" method="post">
+          <label for="stylistName">Change name</label>
+          <input id="stylistName" name="stylistName" type="text" value="@Model.GetName()"> <button id="button" type="submit">Update</button><br>
+
+
+        </form>
+
+        <a class="card-link" href="/">Back home</a>
+        <a class="card-link" href="/stylists">Back to stylists</a>
+
+
+      </div>
+    </div>
+
+
+  </body>
 </center>
+
 </html>
